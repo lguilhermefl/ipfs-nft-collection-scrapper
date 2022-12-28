@@ -49,4 +49,12 @@ async function getImagesFromIpfs(page, ipfsImageUrl) {
   return imageBuffer;
 }
 
+function saveMetadataFile(metadataPath, metadataObject) {
+  fs.writeFileSync(metadataPath, JSON.stringify(metadataObject, null, 2));
+
+  console.log(
+    `${collectionName} #${currentEdition} metadata saved to ${metadataPath}`
+  );
+}
+
 createFolders();
