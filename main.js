@@ -27,4 +27,11 @@ async function initPuppeteer() {
   return { browser, page };
 }
 
+function generateFilePath(fileName) {
+  if (fileName.includes(".json")) {
+    return path.resolve(collectionName, "metadata", fileName);
+  }
+  return path.resolve(collectionName, "images", fileName);
+}
+
 createFolders();
