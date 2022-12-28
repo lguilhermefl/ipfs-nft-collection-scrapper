@@ -66,4 +66,25 @@ function saveImageFile(imagePath, imageBuffer) {
   );
 }
 
+const generateIpfsImageUrl = (imageUrl) => {
+  const imageUrlSplited = imageUrl.split("/");
+  const imageCID = imageUrlSplited[2];
+
+  let imageFormat;
+
+  if (imageUrlSplited[3]) {
+    imageFormat = imageUrlSplited[3].split(".")[1];
+  }
+
+  let ipfsImageUrl;
+
+  if (imageFormat) {
+    ipfsImageUrl = `${baseIpfsUrl}/${imageCID}/${currentEdition}.${imageFormat}`;
+  } else {
+    ipfsImageUrl = `${baseIpfsUrl}/${imageCID}`;
+  }
+
+  return ipfsImageUrl;
+};
+
 createFolders();
