@@ -9,6 +9,56 @@ let errorCount = 0;
 const baseIpfsUrl = "https://ipfs.io/ipfs";
 const { jsonCID, collectionName, collectionSize, pageTimeout } = config;
 
+async function getCollection() {
+  const { browser, page } = await initPuppeteer();
+  try {
+    while (currentEdition <= collectionSize) {
+      page.setDefaultTimeout(pageTimeout);
+
+      const metadataFileName = `${currentEdition}.json`;
+      const metadataPath = generateFilePath(metadataFileName);
+      const existsJsonFile = fs.existsSync(metadataPath);
+
+      if (!existsJsonFile) {
+        const metadataUrl = `${baseIpfsUrl}/${jsonCID}/${currentEdition}.json`;
+        await getMetadataFromIpfs(page, metadataUrl);
+        saveMetadataFile(metadataPath, metadataFileName);
+      }
+
+      if (metadataObject) {
+        const imageName = metadataObject.name;
+        const imagePath = generateFilePath(imageName);
+        const existsImageFile = fs.existsSync(imagePath);
+
+        if (!existsImageFile) {
+          const imageUrl = metadataObject.image;
+          const ipfsImageUrl = generateIpfsImageUrl(imageUrl);
+          const imageBuffer = await getImagesFromIpfs(page, ipfsImageUrl);
+          saveImageFile(imagePath, imageBuffer);
+        }
+      }
+
+      currentEdition++;
+
+      if (currentEdition > collectionSize) {
+        await browser.close();
+        return console.log("Collection completely fetched!");
+      }
+    }
+  } catch (error) {
+    await browser.close();
+    const hasTooManyResquestsFailed = checkForError();
+    if (hasTooManyResquestsFailed) {
+      return console.log(
+        "There is something wrong, could be your config or internet connection!"
+      );
+    }
+    setTimeout(() => {
+      getCollection();
+    }, 100);
+  }
+}
+
 function createFolders() {
   if (!fs.existsSync(collectionName)) {
     fs.mkdirSync(collectionName);
