@@ -26,7 +26,9 @@ When the depencies are installed you'll need to put the desired collection info 
     jsonCID: "QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq",
     collectionName: "Bored Ape Yacht Club",
     collectionSize: 10000,
-    pageTimeout: 1500, // default value, don't change if you don't have a slow internet connection and are receiving errors when downloading files
+    pageTimeout: 1500, // default value, don't change if you don't
+                       // have a slow internet connection and are 
+                       // receiving errors when downloading files
 
 After all collection info is done, save the file and run:
 
