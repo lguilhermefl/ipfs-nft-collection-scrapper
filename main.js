@@ -4,6 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 let currentEdition = 1;
+let errorCount = 0;
 
 const baseIpfsUrl = "https://ipfs.io/ipfs";
 const { jsonCID, collectionName, collectionSize, pageTimeout } = config;
@@ -86,5 +87,16 @@ const generateIpfsImageUrl = (imageUrl) => {
 
   return ipfsImageUrl;
 };
+
+function checkForError() {
+  const maxErrorCount = 20;
+  if (currentEdition === currentEditionWithError) {
+    errorCount++;
+    if (errorCount >= maxErrorCount) {
+      return true;
+    }
+  }
+  currentEditionWithError = currentEdition;
+}
 
 createFolders();
