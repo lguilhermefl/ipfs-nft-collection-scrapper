@@ -34,4 +34,13 @@ function generateFilePath(fileName) {
   return path.resolve(collectionName, "images", fileName);
 }
 
+async function getMetadataFromIpfs(page, metadataUrl) {
+  await page.goto(metadataUrl);
+  await page.content();
+
+  metadataObject = await page.evaluate(() => {
+    return JSON.parse(document.querySelector("body").innerText);
+  });
+}
+
 createFolders();
