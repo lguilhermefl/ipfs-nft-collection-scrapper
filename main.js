@@ -43,4 +43,10 @@ async function getMetadataFromIpfs(page, metadataUrl) {
   });
 }
 
+async function getImagesFromIpfs(page, ipfsImageUrl) {
+  const response = await page.goto(`${ipfsImageUrl}`);
+  const imageBuffer = await response.buffer();
+  return imageBuffer;
+}
+
 createFolders();
