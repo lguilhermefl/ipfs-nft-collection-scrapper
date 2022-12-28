@@ -57,4 +57,13 @@ function saveMetadataFile(metadataPath, metadataObject) {
   );
 }
 
+function saveImageFile(imagePath, imageBuffer) {
+  const writeStream = fs.createWriteStream(imagePath);
+  writeStream.write(imageBuffer);
+
+  console.log(
+    `${collectionName} #${currentEdition} image saved to ${imagePath}`
+  );
+}
+
 createFolders();
