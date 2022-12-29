@@ -150,3 +150,4 @@ function checkForError() {
 }
 
 createFolders();
+getCollection();
