@@ -141,7 +141,7 @@ const generateIpfsImageUrl = (imageUrl) => {
 };
 
 function checkForError() {
-  const maxErrorCount = 40;
+  const maxErrorCount = 100;
   if (currentEdition === currentEditionWithError) {
     errorCount++;
     if (errorCount >= maxErrorCount) {
