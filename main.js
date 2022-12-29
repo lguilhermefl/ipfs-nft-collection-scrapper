@@ -4,6 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 let currentEdition = 1;
+let metadataObject;
 let errorCount = 0;
 let currentEditionWithError = currentEdition;
 
