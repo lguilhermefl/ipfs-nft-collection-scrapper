@@ -5,6 +5,7 @@ import * as path from "path";
 
 let currentEdition = 1;
 let errorCount = 0;
+let currentEditionWithError = currentEdition;
 
 const baseIpfsUrl = "https://ipfs.io/ipfs";
 const { jsonCID, collectionName, collectionSize, pageTimeout } = config;
