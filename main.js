@@ -24,7 +24,7 @@ async function getCollection() {
       if (!existsJsonFile) {
         const metadataUrl = `${baseIpfsUrl}/${jsonCID}/${currentEdition}.json`;
         await getMetadataFromIpfs(page, metadataUrl);
-        saveMetadataFile(metadataPath, metadataFileName);
+        saveMetadataFile(metadataPath);
       }
 
       if (metadataObject) {
@@ -102,7 +102,7 @@ async function getImagesFromIpfs(page, ipfsImageUrl) {
   return imageBuffer;
 }
 
-function saveMetadataFile(metadataPath, metadataObject) {
+function saveMetadataFile(metadataPath) {
   fs.writeFileSync(metadataPath, JSON.stringify(metadataObject, null, 2));
 
   console.log(
