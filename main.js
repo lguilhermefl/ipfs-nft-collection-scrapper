@@ -3,18 +3,25 @@ import puppeteer from "puppeteer";
 import * as fs from "fs";
 import * as path from "path";
 
-let currentEdition = 1;
+const baseIpfsUrl = "https://ipfs.io/ipfs";
+const {
+  jsonCID,
+  collectionName,
+  firstEditionId,
+  lastEditionId,
+  collectionSize,
+  pageTimeout,
+} = config;
+
+let currentEdition = firstEditionId;
 let metadataObject;
 let errorCount = 0;
 let currentEditionWithError = currentEdition;
 
-const baseIpfsUrl = "https://ipfs.io/ipfs";
-const { jsonCID, collectionName, collectionSize, pageTimeout } = config;
-
 async function getCollection() {
   const { browser, page } = await initPuppeteer();
   try {
-    while (currentEdition <= collectionSize) {
+    while (currentEdition <= lastEditionId) {
       page.setDefaultTimeout(pageTimeout);
 
       const metadataFileName = `${currentEdition}.json`;
@@ -43,7 +50,7 @@ async function getCollection() {
 
       currentEdition++;
 
-      if (currentEdition > collectionSize) {
+      if (currentEdition > lastEditionId) {
         await browser.close();
         return console.log("Collection completely fetched!");
       }
