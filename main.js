@@ -60,8 +60,9 @@ async function getCollection() {
     const hasTooManyResquestsFailed = checkForError();
     if (hasTooManyResquestsFailed) {
       console.log(
-        `Edition ${currentEdition} is taking too much time to load at IPFS, trying again...`
+        `Edition ${currentEdition} is taking too much time to load at IPFS, the script will get the rest of the collection and get back to missing ones later!`
       );
+      currentEdition++;
     }
     setTimeout(() => {
       getCollection();
