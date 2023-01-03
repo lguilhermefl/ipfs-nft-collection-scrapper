@@ -5,7 +5,7 @@ import * as path from "path";
 
 const baseIpfsUrl = "https://ipfs.io/ipfs";
 const {
-  jsonCID,
+  ipfsMetadataSampleUrl,
   collectionName,
   firstEditionId,
   lastEditionId,
@@ -27,7 +27,7 @@ async function getCollection() {
       const metadataFileName = `${currentEdition}.json`;
       const metadataPath = generateFilePath(metadataFileName);
       const existsJsonFile = fs.existsSync(metadataPath);
-      const metadataUrl = `${baseIpfsUrl}/${jsonCID}/${currentEdition}.json`;
+      const metadataUrl = generateMetadataUrl();
       await getMetadataFromIpfs(page, metadataUrl);
 
       if (!existsJsonFile) {
@@ -93,6 +93,18 @@ function generateFilePath(fileName) {
     return path.resolve(collectionName, "metadata", fileName);
   }
   return path.resolve(collectionName, "images", fileName);
+}
+
+function generateMetadataUrl() {
+  const hasFileExtension = ipfsMetadataSampleUrl.includes(".");
+  const barIndex = ipfsMetadataSampleUrl.lastIndexOf("/");
+  const baseMetadataUrl = ipfsMetadataSampleUrl.slice(0, barIndex);
+
+  if (hasFileExtension) {
+    return `${baseMetadataUrl}/${currentEdition}.json`;
+  }
+
+  return `${baseMetadataUrl}/${currentEdition}`;
 }
 
 async function getMetadataFromIpfs(page, metadataUrl) {
