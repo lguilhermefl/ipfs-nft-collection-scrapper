@@ -20,10 +20,10 @@ async function getCollection() {
       const metadataFileName = `${currentEdition}.json`;
       const metadataPath = generateFilePath(metadataFileName);
       const existsJsonFile = fs.existsSync(metadataPath);
+      const metadataUrl = `${baseIpfsUrl}/${jsonCID}/${currentEdition}.json`;
+      await getMetadataFromIpfs(page, metadataUrl);
 
       if (!existsJsonFile) {
-        const metadataUrl = `${baseIpfsUrl}/${jsonCID}/${currentEdition}.json`;
-        await getMetadataFromIpfs(page, metadataUrl);
         saveMetadataFile(metadataPath);
       }
 
