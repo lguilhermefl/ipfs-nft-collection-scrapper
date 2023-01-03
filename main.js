@@ -59,8 +59,8 @@ async function getCollection() {
     await browser.close();
     const hasTooManyResquestsFailed = checkForError();
     if (hasTooManyResquestsFailed) {
-      return console.log(
-        "There is something wrong, could be your config or internet connection!"
+      console.log(
+        `Edition ${currentEdition} is taking too much time to load at IPFS, trying again...`
       );
     }
     setTimeout(() => {
