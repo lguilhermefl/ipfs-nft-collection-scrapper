@@ -29,7 +29,8 @@ async function getCollection() {
 
       if (metadataObject) {
         const imageName = metadataObject.name;
-        const imagePath = generateFilePath(imageName);
+        const imageFormat = metadataObject.image.split(".").pop();
+        const imagePath = generateFilePath(`${imageName}.${imageFormat}`);
         const existsImageFile = fs.existsSync(imagePath);
 
         if (!existsImageFile) {
