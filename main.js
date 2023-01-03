@@ -28,6 +28,7 @@ async function getCollection() {
       const metadataPath = generateFilePath(metadataFileName);
       const existsJsonFile = fs.existsSync(metadataPath);
       const metadataUrl = generateMetadataUrl();
+
       await getMetadataFromIpfs(page, metadataUrl);
 
       if (!existsJsonFile) {
@@ -49,10 +50,15 @@ async function getCollection() {
       }
 
       currentEdition++;
+      const imagesCount = fs.readdirSync(`${collectionName}/images`).length;
 
-      if (currentEdition > lastEditionId) {
+      if (imagesCount === collectionSize) {
         await browser.close();
         return console.log("Collection completely fetched!");
+      }
+
+      if (currentEdition > lastEditionId) {
+        currentEdition = firstEditionId;
       }
     }
   } catch (error) {
@@ -97,7 +103,7 @@ function generateFilePath(fileName) {
 }
 
 function generateMetadataUrl() {
-  const hasFileExtension = ipfsMetadataSampleUrl.includes(".");
+  const hasFileExtension = ipfsMetadataSampleUrl.includes(".json");
   const barIndex = ipfsMetadataSampleUrl.lastIndexOf("/");
   const baseMetadataUrl = ipfsMetadataSampleUrl.slice(0, barIndex);
 
