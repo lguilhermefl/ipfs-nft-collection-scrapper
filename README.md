@@ -33,7 +33,7 @@ When the depencies are installed you'll need to put the desired collection info 
     lastEditionId: 10000,
     collectionSize: 10000,
     pageTimeout: 1500, // default value, only change if you're
-                       // receiving too many erros
+                       // receiving too many errors
 
 Detailed explanation for each values in config file:
 
