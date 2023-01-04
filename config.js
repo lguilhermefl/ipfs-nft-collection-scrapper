@@ -1,6 +1,6 @@
 const config = {
   ipfsMetadataSampleUrl:
-    "https://ipfs.io/ipfs/QmNe7EebKaNuRoN2ov9nMuwHXQvXbYXCLM9W1nDBxnqLgL/4773.json", // Metadata link from any edition in a collection
+    "https://ipfs.io/ipfs/QmNe7EebKaNuRoN2ov9nMuwHXQvXbYXCLM9W1nDBxnqLgL/9497.json", // Metadata link from any edition in a collection
   collectionName: "Yaypegs", // It's gonna be the collection folder name
   firstEditionId: 1, // First edition from collection
   lastEditionId: 10000, // Last Edition from collection
