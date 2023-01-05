@@ -38,9 +38,12 @@ When the depencies are installed you'll need to put the desired collection info 
 Detailed explanation for each values in config file:
 
 **ipfsMetadataSampleUrl:** You can get it at opensea collection's page. Click on one of the NFTs, open the tab "Details" and click on "Token ID" number. You'll be redirected to it's metadata page. If it's a IPFS url copy it and paste it here replacing it's value.
+
 **collectionName:**  Name of the folder where all files will be saved.
 **firstEditionId:** It's the first collection's edition. Some collections start with edition 0, but most of them start with 1.
+
 **lastEditionId:** It's the last collection's edition. You can test if it's right by changing the number in the end of any edition's url at opensea.
+
 **collectionSize:** The total size of desired collection.
 
 After all collection info is done, save the file and run:
